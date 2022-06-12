@@ -1,0 +1,22 @@
+#ltime {
+	left: 50px;
+	top: 50px;
+	height: 100px;
+	width: 240px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+#ltime_num {
+	font-size: 30px;
+}
+
+#ltime_hr {
+	top: 10px;
+	left: -40px;
+	width: 220px;
+}
+
+#ltime_chn {
+	top: 4px;
+}

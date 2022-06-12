@@ -1,0 +1,41 @@
+@import url("ltime.css");
+@import url("ltool.css");
+@import url("llist.css");
+
+* {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	display: inline-block;
+	font-family: '微软雅黑';
+}
+
+#main {
+	overflow: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.land,
+.box {
+	position: fixed;
+	color: #000;
+}
+
+.blurBG {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #ffffff;
+	filter: Alpha(opacity=80);
+	z-index: -999;
+}
+
+.box {
+	overflow: auto;
+}

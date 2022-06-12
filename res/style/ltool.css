@@ -1,0 +1,61 @@
+#ltool {
+	left: 50px;
+	top: 200px;
+	width: 240px;
+	bottom: 60px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.ltool_hr {
+	width: 120px;
+	right: 90px;
+}
+
+.ltool_air {
+	width: 1px;
+	height: 10px;
+}
+
+.ltool_nbox {
+	display: block;
+	border-width: 2px;
+	border-color: #000000;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	padding: 3px;
+	margin-top: 5px;
+	left: 20px;
+}
+
+.ltool_cover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 30px;
+	overflow: hidden;
+	filter: Alpha(opacity=0);
+}
+
+.ltool_ntxt0,
+.ltool_ntxt1,
+.ltool_ntxt2 {
+	position: absolute;
+	color: #ffffff;
+}
+
+.ltool_ntxt0 {
+	color: #000000;
+}
+
+.ltool_ntxt1 {
+	margin-top: 1px;
+	margin-left: 1px;
+}
+
+.ltool_ntxt2 {
+	margin-bottom: 1px;
+	margin-right: 1px;
+}

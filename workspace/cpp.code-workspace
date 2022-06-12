@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "F:\\C++"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.hta": "html",
+			"iostream": "cpp"
+		}
+	}
+}

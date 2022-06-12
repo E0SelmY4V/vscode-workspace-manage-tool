@@ -1,0 +1,97 @@
+#llist {
+	position: absolute;
+	top: 36px;
+	left: 340px;
+	width: 680px;
+	min-height: 440px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.llist_foot {
+	width: 1px;
+	height: 76px;
+}
+
+.llist_homeText {
+	top: 10px;
+	left: 8px;
+}
+
+.llist_group {
+	padding: 10px;
+}
+
+.llist_title {
+	left: -6px;
+	border-left: 6px solid #000000;
+	padding-top: 8px;
+	padding-bottom: 14px;
+	padding-left: 10px;
+	padding-right: 120px;
+	display: inline-block;
+}
+
+.llist_line {
+	position: absolute;
+	top: 100%;
+	left: -6px;
+	width: 6px;
+	height: 80px;
+	background: #000000;
+}
+
+.llist_hbox,
+.llist_nbox {
+	position: relative;
+	display: inline-block;
+	width: 125px;
+	height: 125px;
+}
+
+.llist_hblk,
+.llist_nblk {
+	top: 8px;
+	left: 8px;
+	width: 105px;
+	height: 105px;
+	border: 2px solid #ffffff;
+	background: url("../bgp/0.png") no-repeat right;
+}
+
+.llist_hbox {
+	width: 250px;
+}
+
+.llist_hblk {
+	width: 230px;
+}
+
+.llist_ntxt0,
+.llist_ntxt1 {
+	position: absolute;
+	display: block;
+	color: #ffffff;
+}
+
+.llist_ntxt0 {
+	color: #000000;
+	bottom: 5px;
+	left: 5px;
+}
+
+.llist_ntxt1 {
+	left: 6px;
+	bottom: 4px;
+}
+
+.llist_bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	filter: Alpha(opacity=45);
+}
