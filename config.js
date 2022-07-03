@@ -15,20 +15,38 @@ var CONFIG = {
 			icon: "F:\\F1\\website\\pcn\\logo.png"
 		}, {
 			name: "简单代理",
-			file: "sna",
-			icon: "F:\\F1\\website\\wwwroot\\sna\\logo.png"
+			file: "sona",
+			icon: "F:\\F1\\website\\sona\\logo.png"
 		}, [
+			{
+				name: "SEVENTOP.TOP",
+				path: "seventop.top"
+			}, {
+				name: "网站根目录",
+				file: "website"
+			}, {
+				name: "Apache<br />配置",
+				file: "etc-apache2",
+				icon: "workspace/apache.jpg"
+			}, {
+				name: "家",
+				file: "home"
+			}
+		], [
 			{
 				name: "幻想私社程序",
 				path: "scpos"
 			}, {
 				name: "ScpoPHP",
 				file: "scpo-php",
-				bg: "blue"
+				bg: "orange"
+			}, {
+				name: "ScpoPHP Doc",
+				file: "scpo-php-doc",
+				bg: "orange"
 			}, {
 				name: "ScpoAPI",
-				file: "scpo-api",
-				bg: "blue"
+				file: "scpo-api"
 			}, {
 				name: "scpo-webreq.js",
 				file: "webreq"
@@ -37,6 +55,9 @@ var CONFIG = {
 			{
 				name: "|简·陋| 系列程序",
 				path: "sc"
+			}, {
+				name: "网站配置<br />快捷工具",
+				file: "site-conf"
 			}, {
 				name: "查IP工具",
 				file: "chaip"
@@ -60,9 +81,9 @@ var CONFIG = {
 		]
 	],
 	sidebar: [{
-		name: "叫一声",
+		name: "本地网站",
 		action: function () {
-			alert("汪");
+			runfile("\"explorer.exe\" \"F:\\F1\\website\\\"");
 		}
 	}]
 };

@@ -1,6 +1,11 @@
 {
 	"folders": [
 		{
+			"name": "F1",
+			"path": "F:\\F1"
+		},
+		{
+			"name": "js",
 			"path": "F:\\F1\\website\\wwwroot\\js"
 		}
 	],

@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"uri": "vscode-remote://ssh-remote+seventop.top/etc/apache2"
+		}
+	],
+	"remoteAuthority": "ssh-remote+seventop.top",
+	"settings": {}
+}

@@ -20,11 +20,12 @@ function list() {
 		if (!n) n = this;
 		n.getElementsByTagName("div")[0].style.display = "block";
 		n.style.background = "";
+		if (n.timer) clearTimeout(n.timer);
 	}, lclick = function () {
 		runcode(CONFIG.code, this.uri);
 		lmout(this);
 		var n = this;
-		setTimeout(function () { lmon(n) }, 120);
+		n.timer = setTimeout(function () { lmon(n) }, 120);
 	};
 	llist_home.backgroundColor = randomBGC();
 	(function (li, node, uri, isInner) {
@@ -73,10 +74,18 @@ function list() {
 			}
 		}
 	}(CONFIG.workspace, llist, "", 0));
-	var i = -1, nbox, nblk, ntxt, info, tmon = function () {
-		this.parentNode.style.background = this.parentNode.color;
-	}, tmout = function () {
-		this.parentNode.style.background = "";
+	var i = -1, nbox, nblk, ntxt, info, tmon = function (n) {
+		if (!n) n = this;
+		n.parentNode.style.background = n.parentNode.color;
+	}, tmout = function (n) {
+		if (!n) n = this;
+		n.parentNode.style.background = "";
+		clearTimeout(n.timer);
+	}, tclick = function (n) {
+		if (!n) n = this;
+		n.parentNode.style.background = "";
+		n.timer = setTimeout(function () { tmon(n); }, 120);
+		n.clickdo(n);
 	};
 	while (info = CONFIG.sidebar[++i]) {
 		nbox = document.createElement("div");
@@ -94,7 +103,8 @@ function list() {
 		nblk.className = "ltool_cover";
 		nblk.onmouseover = tmon;
 		nblk.onmouseout = tmout;
-		nblk.onclick = info.action;
+		nblk.clickdo = info.action;
+		nblk.onclick = tclick;
 		nblk.innerHTML = "mmmmmmmmmmm";
 		nbox.appendChild(nblk);
 	}
