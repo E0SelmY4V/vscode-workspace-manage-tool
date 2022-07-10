@@ -83,7 +83,7 @@ var CONFIG = {
 	sidebar: [{
 		name: "本地网站",
 		action: function () {
-			runfile("\"explorer.exe\" \"F:\\F1\\website\\\"");
+			Runfile("\"explorer.exe\" \"F:\\F1\\website\\\"");
 		}
 	}]
 };

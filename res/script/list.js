@@ -22,7 +22,7 @@ function list() {
 		n.style.background = "";
 		if (n.timer) clearTimeout(n.timer);
 	}, lclick = function () {
-		runcode(CONFIG.code, this.uri);
+		Runcode(CONFIG.code, this.uri);
 		lmout(this);
 		var n = this;
 		n.timer = setTimeout(function () { lmon(n) }, 120);
