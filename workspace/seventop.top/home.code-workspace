@@ -1,9 +1,0 @@
-{
-	"folders": [
-		{
-			"uri": "vscode-remote://ssh-remote+seventop.top/home"
-		}
-	],
-	"remoteAuthority": "ssh-remote+seventop.top",
-	"settings": {}
-}
