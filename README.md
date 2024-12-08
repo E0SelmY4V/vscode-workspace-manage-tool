@@ -10,9 +10,9 @@
 
 ## 使用方法
 
-请将工作区文件置于 `workspace` 文件夹下。之后复制 `config.default.js` 为`config.js` 并进行修改。
+请将工作区文件置于 `workspace` 文件夹下。之后复制 `workspace/config.default.js` 为`workspace/config.js` 并进行修改。
 
-通过配置 `config.js` 中 `CONFIG` 对象的属性，你可以对此工具进行配置。
+通过配置 `workspace/config.js` 中 `CONFIG` 对象的属性，你可以对此工具进行配置。
 
 |变量|说明|
 |-|-|

@@ -1,4 +1,6 @@
-workspace
+workspace/*
+!workspace/README.md
+!workspace/config.default.js
 config.js
 res/bgp/bgp*
 res/bgp/current-bgp.jpg
