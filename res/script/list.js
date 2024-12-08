@@ -9,10 +9,12 @@ function randomBGC() {
 	return color[Math.floor(Math.random() * color.length)];
 }
 function getRunFunc(uri) {
-	return function () { runcode(CONFIG.code, uri); }
+	return function () { runcode(CONFIG.code, uri); };
 }
 function list() {
-	var lmon = function (n) {
+	var end = function (e) {
+		if (e.ctrlKey) window.close();
+	}, lmon = function (n) {
 		if (!n) n = this;
 		n.getElementsByTagName("div")[0].style.display = "none";
 		n.style.background = n.color;
@@ -25,7 +27,8 @@ function list() {
 		Runcode(CONFIG.code, this.uri);
 		lmout(this);
 		var n = this;
-		n.timer = setTimeout(function () { lmon(n) }, 120);
+		n.timer = setTimeout(function () { lmon(n); }, 120);
+		end(event);
 	};
 	llist_home.backgroundColor = randomBGC();
 	(function (li, node, uri, isInner) {
@@ -82,11 +85,12 @@ function list() {
 		if (!n) n = this;
 		n.parentNode.style.background = "";
 		clearTimeout(n.timer);
-	}, tclick = function (n) {
-		if (!n) n = this;
+	}, tclick = function () {
+		var n = this;
 		n.parentNode.style.background = "";
 		n.timer = setTimeout(function () { tmon(n); }, 120);
-		n.clickdo(n);
+		n.clickdo();
+		end(event);
 	};
 	while (info = CONFIG.sidebar[++i]) {
 		nbox = document.createElement("div");
