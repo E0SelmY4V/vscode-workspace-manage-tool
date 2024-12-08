@@ -20,7 +20,7 @@
 
 <body>
 	<script>
-		ScpoUI.createBGP(CONFIG.bgp)
+		ScpoUI.createBGP(CONFIG.maxBgp ? "./res/bgp/current-bgp.jpg" : CONFIG.bgp)
 	</script>
 	<div class="land" id="ltime">
 		<div class="blurBG"></div>
