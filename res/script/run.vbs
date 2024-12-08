@@ -1,12 +1,8 @@
 Set WS = CreateObject("Wscript.Shell")
+Set SA = CreateObject("Shell.Application")
 Function Runcode(code, file)
-	WS.Run """" & code & """ " & _
-		"""" & Replace( _
-			Mid(Left( _
-					location.href, _
-					InStrRev(location.href, "/") _
-			), 9 _
-		), "/", "\") & "workspace\" & file & ".code-workspace"""
+	WS.Run """" & code & """ " & """" & GetDir() & "workspace\" & file & ".code-workspace"""
+	' SA.ShellExecute code, GetDir() & "workspace\" & file & ".code-workspace", "", "runas", 1
 End Function
 Function Runfile(file)
 	WS.Run file
