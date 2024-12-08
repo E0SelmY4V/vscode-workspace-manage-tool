@@ -7,6 +7,8 @@ Function Runcode(code, file, admin)
 		SA.ShellExecute code, GetDir() & "workspace\" & file & ".code-workspace", ""
 	End If
 End Function
-Function Runfile(file)
-	WS.Run file
+Function Runfile(file, hidden, sync)
+	If IsEmpty(hidden) Then hidden = 1
+	If IsEmpty(sync) Then sync = False
+	WS.Run file, hidden, sync
 End Function

@@ -3,6 +3,7 @@
  *   name: string;
  *   icon?: string;
  *   admin?: boolean;
+ *   preclick?: () => void;
  * } & (
  *   | { file: string; }
  *   | { file?: string; onclick(): void; }

@@ -24,6 +24,7 @@ function list() {
 		n.style.background = "";
 		if (n.timer) clearTimeout(n.timer);
 	}, lclick = function () {
+		if (this.preclick) this.preclick();
 		Runcode(CONFIG.code, this.uri, this.admin);
 		lmout(this);
 		var n = this;
@@ -52,6 +53,7 @@ function list() {
 				nbox.onmouseout = lmout;
 				nbox.uri = uri + info.file;
 				nbox.admin = Boolean(info.admin);
+				nbox.preclick = info.preclick;
 				nbox.onclick = info.onclick || lclick;
 				node.appendChild(nbox);
 				nblk = document.createElement("div");
