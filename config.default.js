@@ -2,6 +2,7 @@
  * @typedef {{
  *   name: string;
  *   icon?: string;
+ *   admin?: boolean;
  * } & (
  *   | { file: string; }
  *   | { file?: string; onclick(): void; }

@@ -24,7 +24,7 @@ function list() {
 		n.style.background = "";
 		if (n.timer) clearTimeout(n.timer);
 	}, lclick = function () {
-		Runcode(CONFIG.code, this.uri);
+		Runcode(CONFIG.code, this.uri, this.admin);
 		lmout(this);
 		var n = this;
 		n.timer = setTimeout(function () { lmon(n); }, 120);
@@ -51,6 +51,7 @@ function list() {
 				nbox.onmouseover = lmon;
 				nbox.onmouseout = lmout;
 				nbox.uri = uri + info.file;
+				nbox.admin = Boolean(info.admin);
 				nbox.onclick = info.onclick || lclick;
 				node.appendChild(nbox);
 				nblk = document.createElement("div");
