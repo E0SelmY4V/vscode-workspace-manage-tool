@@ -63,6 +63,7 @@ function list() {
 					icon.style.width = icon.style.height = "100%";
 					icon.style.position = "absolute";
 					nblk.appendChild(icon);
+					nblk.style.background = '';
 				} else nblk.style.backgroundColor = nbox.color;
 				nbox.appendChild(nblk);
 				for (var j = 1; j >= 0; j--) {

@@ -2,7 +2,7 @@
 	position: absolute;
 	top: 36px;
 	left: 340px;
-	width: 680px;
+	width: 805px;
 	min-height: 440px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -49,6 +49,7 @@
 	display: inline-block;
 	width: 125px;
 	height: 125px;
+	cursor: pointer;
 }
 
 .llist_hblk,

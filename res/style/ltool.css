@@ -37,6 +37,7 @@
 	font-size: 30px;
 	overflow: hidden;
 	filter: Alpha(opacity=0);
+	cursor: pointer;
 }
 
 .ltool_ntxt0,
