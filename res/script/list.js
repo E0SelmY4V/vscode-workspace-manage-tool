@@ -48,7 +48,7 @@ function list() {
 				nbox.onmouseover = lmon;
 				nbox.onmouseout = lmout;
 				nbox.uri = uri + info.file;
-				nbox.onclick = lclick;
+				nbox.onclick = info.onclick || lclick;
 				node.appendChild(nbox);
 				nblk = document.createElement("div");
 				nblk.className = "llist_bg";
