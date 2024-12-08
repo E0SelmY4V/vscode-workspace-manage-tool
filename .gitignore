@@ -1,2 +1,4 @@
 workspace
 config.js
+res/bgp/bgp*
+res/bgp/current-bgp.jpg
