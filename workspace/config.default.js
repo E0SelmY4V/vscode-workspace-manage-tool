@@ -4,6 +4,7 @@
  *   icon?: string;
  *   admin?: boolean;
  *   preclick?: () => void;
+ *   bg?: string;
  * } & (
  *   | { file: string; }
  *   | { file?: string; onclick(): void; }
