@@ -7,8 +7,11 @@ Function Runcode(code, file, admin)
 		SA.ShellExecute code, GetDir() & "workspace\" & file & ".code-workspace", ""
 	End If
 End Function
-Function Runfile(file, hidden, sync)
-	If IsEmpty(hidden) Then hidden = 1
+Function Runvim(d, folder)
+	Runfile "wsl.exe -d " & d & " --shell-type login -- echo ""run_dir=" & folder & """ > $HOME/.manage-tool", 0, True
+End Function
+Function Runfile(file, show, sync)
+	If IsEmpty(show) Then show = 1
 	If IsEmpty(sync) Then sync = False
-	WS.Run file, hidden, sync
+	WS.Run file, show, sync
 End Function
