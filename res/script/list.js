@@ -25,7 +25,10 @@ function list() {
 		if (n.timer) clearTimeout(n.timer);
 	}, lclick = function () {
 		if (this.preclick) this.preclick();
-		Runcode(CONFIG.code, this.uri, this.admin);
+		switch (this.type) {
+			case 'vscode': Runcode(CONFIG.code, this.uri, this.admin); break;
+			case 'vim': Runvim('Ubuntu', this.uri); CONFIG.openTerminal(); break;
+		}
 		lmout(this);
 		var n = this;
 		n.timer = setTimeout(function () { lmon(n); }, 120);
@@ -51,10 +54,11 @@ function list() {
 				nbox.color = randomBGC();
 				nbox.onmouseover = lmon;
 				nbox.onmouseout = lmout;
-				nbox.uri = uri + info.file;
+				nbox.uri = info.uri || uri + info.file;
 				nbox.admin = Boolean(info.admin);
 				nbox.preclick = info.preclick;
 				nbox.onclick = info.onclick || lclick;
+				nbox.type = info.type || 'vscode';
 				node.appendChild(nbox);
 				nblk = document.createElement("div");
 				nblk.className = "llist_bg";
