@@ -5,5 +5,5 @@
 		"declaration": false,
 		"outDir": "./dist"
 	},
-	"include": ["**/*.ts", "eslint.config.js"]
+	"include": ["**/*.ts", "eslint.config.mjs"]
 }

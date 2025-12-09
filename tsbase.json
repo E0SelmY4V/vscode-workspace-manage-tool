@@ -22,7 +22,5 @@
 		"allowSyntheticDefaultImports": true,
 		"checkJs": true
 	},
-	"exclude": [
-		"**/dist"
-	]
+	"exclude": ["**/dist"]
 }

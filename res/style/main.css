@@ -1,6 +1,6 @@
-@import url("ltime.css");
-@import url("ltool.css");
-@import url("llist.css");
+@import url('ltime.css');
+@import url('ltool.css');
+@import url('llist.css');
 
 * {
 	padding: 0;

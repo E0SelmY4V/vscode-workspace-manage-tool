@@ -33,6 +33,8 @@ const config = defineConfig(
 		ignores: [
 			'**/*.md',
 			'.*',
+			'res/**/*.js',
+			'workspace/**/*.js',
 			'cz-config.cjs',
 			'**/dist',
 		],
