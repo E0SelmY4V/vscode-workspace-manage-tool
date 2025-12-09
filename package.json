@@ -1,0 +1,56 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "vscode-workspace-manage-tool",
+	"private": true,
+	"version": "0.1.0",
+	"description": "manage your workspace",
+	"author": "e0selmy4v",
+	"devDependencies": {
+		"@eslint/js": "latest",
+		"@eslint/markdown": "latest",
+		"@types/eslint": "latest",
+		"@types/tape": "latest",
+		"colortape": "latest",
+		"eslint": "latest",
+		"eslint-config-accurtype-style": "latest",
+		"esm-entry": "latest",
+		"globals": "latest",
+		"husky": "latest",
+		"prettier": "latest",
+		"rimraf": "latest",
+		"tape": "latest",
+		"esbuild": "latest",
+		"tsx": "latest",
+		"typescript": "latest",
+		"typescript-eslint": "latest"
+	},
+	"type": "commonjs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/E0SelmY4V/vscode-workspace-manage-tool.git"
+	},
+	"scripts": {
+		"prepare": "husky",
+		"prebuild": "tsc",
+		"build": "tsx pack.ts",
+		"clean": "rimraf res/script/dist && rimraf dist",
+		"test": "pnpm runall test",
+		"prefmt": "prettier -w .",
+		"fmt": "eslint . --fix",
+		"prelint": "prettier -c .",
+		"lint": "eslint .",
+		"ci": "pnpm lint & pnpm test"
+	},
+	"browserslist": [
+		"ie 6"
+	],
+	"prettier": {
+		"printWidth": 200,
+		"tabWidth": 4,
+		"useTabs": true,
+		"semi": true,
+		"singleQuote": true,
+		"jsxSingleQuote": false,
+		"trailingComma": "all"
+	}
+}

@@ -1,0 +1,16 @@
+**/*.js
+**/*.cjs
+**/*.mjs
+**/*.jsx
+**/*.cjsx
+**/*.mjsx
+**/*.ts
+**/*.cts
+**/*.mts
+**/*.tsx
+**/*.ctsx
+**/*.mtsx
+**/*.md
+**/dist
+pnpm-lock.yaml
+

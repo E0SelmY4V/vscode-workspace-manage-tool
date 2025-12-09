@@ -4,3 +4,7 @@ workspace/*
 config.js
 res/bgp/bgp*
 res/bgp/current-bgp.jpg
+*.swp
+node_modules
+pnpm-lock.yaml
+**/dist
