@@ -1,8 +1,8 @@
 import { buildSync } from 'esbuild';
 
 buildSync({
-	entryPoints: ['./dist/res/script/index.js'],
-	outdir: './res/script/dist',
+	entryPoints: ['./dist/src/onload.js'],
+	outfile: './res/script/dist.js',
 	format: 'iife',
 	target: 'es5',
 	bundle: true,

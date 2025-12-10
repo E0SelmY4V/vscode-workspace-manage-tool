@@ -1,10 +1,6 @@
-import * as Scpos from './bgp.js';
-import { gele, merge } from './util.js';
+import { gele, merge } from './util';
 
 declare global {
-	namespace globalThis {
-		export import ScpoUI = Scpos;
-	}
 	interface HTMLElement {
 		/**IE 才有的一个样式对象属性 */
 		currentStyle: ReturnType<typeof getComputedStyle>;
@@ -13,7 +9,6 @@ declare global {
 	}
 }
 
-globalThis.ScpoUI = Scpos;
 /**获得样式对象 */
 export function getStyle(node: HTMLElement) {
 	return document.defaultView

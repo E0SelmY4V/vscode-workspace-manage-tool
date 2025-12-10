@@ -1,8 +1,6 @@
-/// <reference path="./run.ts" />
-
-import './config';
-import { IdeType, Info, InfoList, SideInfo } from './config';
-import { gele, gid, thr } from './util';
+import { IdeType, Info, InfoList, SideInfo } from '../config';
+import { gele, gid, thr } from '../lib/util';
+import '../vbs';
 
 function randomBGC() {
 	const color = [
