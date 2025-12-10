@@ -1,5 +1,7 @@
 export type Tostrable = string | number | null | undefined | boolean;
 export type Dereadonly<T> = { -readonly [K in keyof T]: T[K] };
+type Nullish = null | false | undefined | '' | 0;
+export type Nullable<T> = T extends Nullish ? never : T | Nullish;
 
 /**
  * 字符串拼出错误
@@ -67,14 +69,14 @@ export function gele<K extends gele.Tags, T extends gele.PropsMap<K>>(
 	const ele = document.createElement(tag);
 	if (typeof props === 'undefined') return ele as any;
 	merge(props, ele, ['nodes', 'style']);
-	props.nodes?.map(node => ele.appendChild(node));
+	props.nodes?.map(node => node && ele.appendChild(node));
 	merge(props.style, ele.style);
 	return ele as any;
 }
 export namespace gele {
 	export type Tags = keyof HTMLElementTagNameMap;
 	interface OtherOption {
-		nodes: readonly HTMLElement[];
+		nodes: readonly Nullable<HTMLElement>[];
 		style: Readonly<Partial<CSSStyleDeclaration>>;
 	}
 	interface PartOtherOption extends Readonly<Partial<OtherOption>> { }
