@@ -15,3 +15,6 @@ Function Runfile(file, show, sync)
 	If IsEmpty(sync) Then sync = False
 	WS.Run file, show, sync
 End Function
+Function Exec(command)
+	Exec = WS.Exec(command).Stdout.ReadAll()
+End Function
