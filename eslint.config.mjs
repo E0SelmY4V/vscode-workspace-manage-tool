@@ -14,6 +14,7 @@ const config = defineConfig(
 		name: 'TS Base Config',
 		languageOptions: {
 			parserOptions: {
+				// @ts-ignore
 				tsconfigRootDir: getDirname(import.meta.url),
 				project: [
 					'tsconfig.json',

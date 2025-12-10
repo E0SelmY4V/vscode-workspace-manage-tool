@@ -1,0 +1,4 @@
+[submodule "res/script/sinonum"]
+	path = res/script/sinonum
+	url = git@github.com:E0SelmY4V/sinonum
+	branch = HEAD
