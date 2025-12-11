@@ -9,22 +9,27 @@ interface DisplayItem {
 export enum IdeType {
 	Vscode = 'vscode',
 	Vim = 'vim',
+	Click = 'click',
 }
 interface VscodeInfo {
-	readonly file: string;
-	readonly type?: IdeType.Vscode;
+	readonly fileName: string;
+	readonly type: IdeType.Vscode;
 	readonly admin?: boolean;
 }
 interface VimInfo {
-	readonly uri: string;
+	readonly path: string;
 	readonly type: IdeType.Vim;
 }
-type IdeInfo = VimInfo | VscodeInfo;
-interface Clickable {
-	readonly preclick?: () => void;
-	readonly onclick?: () => void;
+interface ClickInfo {
+	onclick(): void;
+	readonly type?: IdeType.Click;
+	readonly fileName?: string;
 }
-export type Info = DisplayItem & IdeInfo & Clickable;
+type IdeInfo = VimInfo | VscodeInfo | ClickInfo;
+interface OtherInfo {
+	readonly preclick?: () => void;
+}
+export type Info = DisplayItem & IdeInfo & OtherInfo;
 
 interface ListTitle {
 	readonly name: string;
@@ -38,15 +43,24 @@ export interface SideInfo {
 	readonly name: string;
 	action(): void;
 }
+export enum CacheMethod {
+	Python = 'python',
+	Nodejs = 'nodejs',
+}
 export interface Config {
 	/**VSCode 的位置 */
 	readonly code?: string;
 	readonly openTerminal?: () => void;
 	readonly bgp: string;
 	readonly maxBgp: number;
-	readonly cacheMethod: 'python' | 'node';
+	readonly cacheMethod: CacheMethod;
 	readonly workspace: readonly (Info | InfoList)[];
 	readonly sidebar: readonly SideInfo[];
+	readonly ctrlAction?: () => void;
+	readonly homeBg?: boolean;
+}
+export namespace Default {
+	export const ctrlAction = () => window.close();
 }
 declare global {
 	const CONFIG: Config;

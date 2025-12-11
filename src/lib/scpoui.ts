@@ -141,3 +141,24 @@ export function createBGP(dadNode: HTMLElement, src: string) {
 	if (picNode.readystate == 'complete') picNode.onload();
 }
 
+const bgColor = [
+	'#dc1a0e',
+	'#01cd0f',
+	'#f2e722',
+	'#04c3f2',
+	'#da5bc5',
+];
+export function randomBgColor() {
+	return bgColor[Math.floor(Math.random() * bgColor.length)];
+}
+
+export function prominentSpan(
+	innerHTML: string,
+	className: string,
+	size: number,
+): HTMLSpanElement[] {
+	return Array(size)
+		.fill(size - 1)
+		.map((v, i) => v - i)
+		.map(i => gele('span', { innerHTML, className: `${className}${i}` }));
+}

@@ -2,8 +2,8 @@
 
 /**@type {Config} */
 var CONFIG = {
-	code: "E:\\VSCode\\Code.exe",
-	bgp: "https://source.unsplash.com/1920x1080/?snow,nature",
+	code: 'E:\\VSCode\\Code.exe',
+	bgp: 'https://source.unsplash.com/1920x1080/?snow,nature',
 	maxBgp: 10,
 	cacheMethod: 'python',
 	workspace: [],

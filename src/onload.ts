@@ -1,6 +1,6 @@
 import { list } from './ui/list';
-import { timeGO } from './ui/time';
-import * as Scpos from './lib/bgp';
+import { timeStartShow } from './ui/time';
+import * as Scpos from './lib/scpoui';
 
 declare global {
 	namespace globalThis {
@@ -9,7 +9,7 @@ declare global {
 }
 globalThis.ScpoUI = Scpos;
 window.onload = () => {
-	timeGO();
+	timeStartShow();
 	list();
 };
 

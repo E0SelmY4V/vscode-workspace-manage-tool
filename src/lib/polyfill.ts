@@ -16,6 +16,12 @@ Array.prototype.map = function <T>(callbackfn: (value: any, index: number, array
 	for (let i = 0; i < this.length; ++i) results.push(callbackfn(this[i], i, this));
 	return results;
 };
+Array.prototype.fill = function (v, start = 0, end) {
+	if (start < 0) start = this.length - start;
+	if (end === void 0) end = this.length;
+	if (end < 0) end = this.length - end;
+	return this.map((ori, i) => (i >= start && i < end ? v : ori));
+};
 Array.prototype.includes = function (n, fromIndex) {
 	let flag = false;
 	this.slice(fromIndex).map(e => flag ||= e === n);
