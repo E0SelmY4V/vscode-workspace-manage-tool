@@ -1,4 +1,4 @@
-import { Default, SideInfo } from '../config';
+import { config, Default, SideInfo } from '../config';
 import { randomBgColor } from '../lib/scpoui';
 import { gele } from '../lib/util';
 
@@ -19,7 +19,7 @@ namespace SideBox {
 		n.style.background = '';
 		n.timer = setTimeout((() => { tmon(n); }) as TimerHandler, 120);
 		n.clickdo();
-		if ((event as MouseEvent).ctrlKey) (CONFIG.ctrlAction ?? Default.ctrlAction)();
+		if ((event as MouseEvent).ctrlKey) (config.ctrlAction ?? Default.ctrlAction)();
 	}
 }
 export function getSideBox(info: SideInfo): SideBox {

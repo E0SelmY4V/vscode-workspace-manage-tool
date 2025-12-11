@@ -63,6 +63,9 @@ export namespace Default {
 	export const ctrlAction = () => window.close();
 }
 declare global {
-	const CONFIG: Config;
+	export let CONFIG: Config | undefined;
 }
 
+export const config: Config = typeof CONFIG === 'undefined'
+	? CONFIG = require('../workspace/config').config
+	: CONFIG;

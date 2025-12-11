@@ -1,4 +1,4 @@
-import { Default, IdeType, Info, InfoList } from '../config';
+import { config, Default, IdeType, Info, InfoList } from '../config';
 import { prominentSpan, randomBgColor } from '../lib/scpoui';
 import { gele, thr } from '../lib/util';
 
@@ -26,18 +26,18 @@ namespace ClickBox {
 		n.preclick?.();
 		switch (n.type) {
 			case IdeType.Vscode:
-				CONFIG.code
-					? runcode(CONFIG.code, n.uri, n.admin)
+				config.code
+					? runcode(config.code, n.uri, n.admin)
 					: thr(Error());
 				break;
 			case IdeType.Vim:
 				runvim('Ubuntu', n.uri);
-				CONFIG.openTerminal?.();
+				config.openTerminal?.();
 				break;
 		}
 		mouseOut(n);
 		n.timer = setTimeout((() => { mouseOver(n); }) as TimerHandler, 120);
-		if ((event as MouseEvent).ctrlKey) (CONFIG.ctrlAction ?? Default.ctrlAction)();
+		if ((event as MouseEvent).ctrlKey) (config.ctrlAction ?? Default.ctrlAction)();
 	};
 }
 export function getClickBox(info: Info, pathNow: string): ClickBox {
