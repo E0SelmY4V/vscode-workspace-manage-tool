@@ -67,13 +67,15 @@ declare global {
 	const workspaceDir: string;
 }
 
-// @ts-ignore
-if (typeof window !== 'undefined') window.workspaceDir = workspaceDir;
-try {
+if (isRuntime()) {
+	// @ts-ignore
+	window.workspaceDir = workspaceDir;
 	typeof CONFIG === 'undefined'
 		? CONFIG = require('../workspace/config').config
 		: CONFIG;
-} catch {
+} else {
+	// @ts-ignore
+	globalThis.workspaceDir = '';
 	// @ts-ignore
 	globalThis.CONFIG = null as any;
 }
