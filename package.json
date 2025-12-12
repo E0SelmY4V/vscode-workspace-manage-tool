@@ -34,6 +34,7 @@
 		"prebuild": "tsc",
 		"build": "tsx pack.ts",
 		"clean": "rimraf res/script/dist && rimraf dist",
+		"test": "tsc --noEmit",
 		"prefmt": "prettier -w .",
 		"fmt": "eslint . --fix",
 		"prelint": "prettier -c .",
