@@ -63,9 +63,12 @@ export namespace Default {
 	export const ctrlAction = () => window.close();
 }
 declare global {
-	export let CONFIG: Config | undefined;
+	let CONFIG: Config | undefined;
+	const workspaceDir: string;
 }
 
+// @ts-ignore
+window.workspaceDir = workspaceDir;
 export const config: Config = typeof CONFIG === 'undefined'
 	? CONFIG = require('../workspace/config').config
 	: CONFIG;
