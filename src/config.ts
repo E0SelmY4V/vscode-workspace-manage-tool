@@ -68,7 +68,35 @@ declare global {
 }
 
 // @ts-ignore
-window.workspaceDir = workspaceDir;
-export const config: Config = typeof CONFIG === 'undefined'
-	? CONFIG = require('../workspace/config').config
-	: CONFIG;
+if (typeof window !== 'undefined') window.workspaceDir = workspaceDir;
+try {
+	typeof CONFIG === 'undefined'
+		? CONFIG = require('../workspace/config').config
+		: CONFIG;
+} catch {
+	// @ts-ignore
+	globalThis.CONFIG = null as any;
+}
+export const config: Config = CONFIG!;
+
+export function isRuntime() {
+	return typeof document !== 'undefined';
+}
+
+export function build({ workspaceDir = '' }) {
+	if (isRuntime()) return;
+	if (!workspaceDir) workspaceDir = __dirname + '/workspace';
+	const n: typeof import('child_process') = require('child_process'.split('_').join('_'));
+	n.exec(
+		`WORKSPACE_DIR="${workspaceDir}" pnpm build`,
+		(error, stdout, stderr) => {
+			console.log('error:');
+			console.log(error);
+			console.log('stdout:');
+			console.log(stdout);
+			console.log('stderr:');
+			console.log(stderr);
+		},
+	);
+}
+
