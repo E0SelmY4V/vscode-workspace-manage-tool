@@ -2,9 +2,13 @@ import { sinonum } from '../lib/sinonum';
 import { gid } from '../lib/util';
 
 const units = ['点', '分', '秒'];
+type Times = readonly [number, number, number];
+let preTimes: Times = [0, 0, 0];
 function updateTime() {
 	const date = new Date();
-	const times = [date.getHours(), date.getMinutes(), date.getSeconds()];
+	const times: Times = [date.getHours(), date.getMinutes(), date.getSeconds()];
+	if (times.join(',') === preTimes.join(',')) return;
+	preTimes = times;
 	gid('ltime_chn', 'a').innerText = sinonum(times.map(String))
 		.map((s, i) => s + units[i])
 		.join('');
@@ -12,6 +16,5 @@ function updateTime() {
 }
 export function timeStartShow(): number {
 	updateTime();
-	return setInterval(updateTime as TimerHandler, 1000);
+	return setInterval(updateTime as TimerHandler, 200);
 }
-
