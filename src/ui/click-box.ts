@@ -20,7 +20,7 @@ export class ClickBox extends Cele<'span'> {
 		this.style.background = '';
 		if (this.timer) clearTimeout(this.timer);
 	};
-	timer?: number;
+	private timer?: number;
 	override readonly onclick = () => {
 		this.preclick?.();
 		switch (this.type) {
@@ -49,24 +49,26 @@ export class ClickBox extends Cele<'span'> {
 		this.preclick = info.preclick;
 		this.type = info.type ?? IdeType.Click;
 		if ('onclick' in info) this.onclick = info.onclick;
-		this.appendChild(this.bg);
-		this.appendChild(gele('div', {
-			className: 'llist_nblk',
-			style: {
-				background: info.icon ? '' : this.color,
-			},
-			nodes: [
-				info.icon && gele('img', {
-					src: info.icon,
-					style: {
-						width: '100%',
-						height: '100%',
-						position: 'absolute',
-					},
-				}),
-				...prominentSpan(info.name, 'llist_ntxt', 2),
-			],
-		}));
+		this.addNode([
+			this.bg,
+			gele('div', {
+				className: 'llist_nblk',
+				style: {
+					background: info.icon ? '' : this.color,
+				},
+				nodes: [
+					info.icon && gele('img', {
+						src: info.icon,
+						style: {
+							width: '100%',
+							height: '100%',
+							position: 'absolute',
+						},
+					}),
+					...prominentSpan(info.name, 'llist_ntxt', 2),
+				],
+			}),
+		]);
 	}
 }
 

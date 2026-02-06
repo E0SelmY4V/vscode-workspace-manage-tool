@@ -63,9 +63,16 @@ export function gid<K extends gele.Tags>(id: string, tag: K): HTMLElementTagName
  */
 export const Cele = class {
 	constructor(tag: gele.Tags) {
-		return document.createElement(tag);
+		const ele = document.createElement(tag) as any;
+		ele.addNode = (nodes?: gele.OtherOption['nodes']) => {
+			nodes?.map(node => node && ele.appendChild(node));
+		};
+		return ele;
 	}
-} as new<K extends gele.Tags>(tag: K) => HTMLElementTagNameMap[K];
+} as new<K extends gele.Tags>(tag: K) => (
+	HTMLElementTagNameMap[K]
+	& { addNode(nodes?: gele.OtherOption['nodes']): void }
+);
 
 /**
  * 方便地获得一个元素
@@ -84,7 +91,7 @@ export function gele<K extends gele.Tags, T extends gele.PropsMap<K>>(
 }
 export namespace gele {
 	export type Tags = keyof HTMLElementTagNameMap;
-	interface OtherOption {
+	export interface OtherOption {
 		nodes: readonly Nullable<HTMLElement>[];
 		style: Readonly<Partial<CSSStyleDeclaration>>;
 	}

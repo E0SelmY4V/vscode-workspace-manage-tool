@@ -33,11 +33,13 @@ export class SideBox extends Cele<'div'> {
 	constructor(info: SideInfo) {
 		super('div');
 		this.clickdo = info.action;
-		[2, 1, 0].map(i => gele('span', {
-			innerHTML: info.name,
-			className: `ltool_ntxt${i}`,
-		})).map(n => this.appendChild(n));
-		this.appendChild(new Cover(this));
+		this.addNode([
+			...[2, 1, 0].map(i => gele('span', {
+				innerHTML: info.name,
+				className: `ltool_ntxt${i}`,
+			})),
+			new Cover(this),
+		]);
 	}
 }
 
