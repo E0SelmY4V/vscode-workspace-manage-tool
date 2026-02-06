@@ -43,11 +43,8 @@ export function setBackground<T extends HTMLElement>(bgNode: T, dadNode: HTMLEle
 export type ResizeFns = readonly (() => void)[];
 /**检测大小改变的 iframe */
 export class ResizeIframe extends Cele<'iframe'> {
-	override readonly onload = () => {
-		this.onresize = () => this.resizeFns.map(f => f());
-	};
+	override readonly onresize = () => this.resizeFns.map(f => f());
 	constructor(
-		resizeBox: ResizeBox,
 		protected readonly resizeFns: ResizeFns,
 	) {
 		super('iframe');
@@ -55,9 +52,6 @@ export class ResizeIframe extends Cele<'iframe'> {
 			height: '100%',
 			width: '100%',
 		}, this.style);
-		resizeBox.appendChild(this);
-		if (this.contentWindow === null) throw Error('no context window');
-		this.contentWindow.onload = this.onload;
 	}
 }
 /**带着 iframe 的盒子 */
@@ -79,7 +73,7 @@ export class ResizeBox extends Cele<'div'> {
 	/**设置 TesterBox 里 TesterIframe 的数量 */
 	protected readonly setIframeNumber = (n: number) => {
 		while (this.iframes.length < n) {
-			this.iframes.push(new ResizeIframe(this, this.resizeFns));
+			this.iframes.push(this.appendChild(new ResizeIframe(this.resizeFns)));
 		}
 		while (this.iframes.length > n) {
 			const iframe = this.iframes.pop();
@@ -122,13 +116,10 @@ export function createBGP(dadNode: HTMLElement, src: string) {
 	dadNode.insertBefore(setBackground(boxNode, dadNode), dadNode.firstChild);
 	let scale: number;
 	function resizeFn() {
-		let x = boxNode.clientWidth;
-		let y = boxNode.clientHeight;
-		const yFact = y;
-		const xFact = x;
-		x / y < scale ? x = y * scale : y = x / scale;
-		x += 2;
-		y += 2;
+		const [xFact, yFact] = [boxNode.clientWidth, boxNode.clientHeight];
+		const [x, y] = xFact / yFact < scale
+			? [Math.ceil(yFact * scale), yFact]
+			: [xFact, Math.ceil(xFact / scale)];
 		merge({
 			width: x + 'px',
 			height: y + 'px',
@@ -137,13 +128,11 @@ export function createBGP(dadNode: HTMLElement, src: string) {
 		}, picNode.style);
 	}
 	new ResizeBox(dadNode, [resizeFn]);
-	picNode.onload = function () {
+	picNode.onload = () => {
 		scale = picNode.width / picNode.height;
 		resizeFn();
 		boxNode.appendChild(picNode);
 	};
-	// @ts-ignore
-	if (picNode.readystate == 'complete') picNode.onload();
 }
 
 const bgColor = [
