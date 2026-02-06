@@ -1,4 +1,4 @@
-import { gele, merge } from './util';
+import { Cele, gele, merge } from './util';
 
 declare global {
 	interface HTMLElement {
@@ -39,65 +39,70 @@ export function setBackground<T extends HTMLElement>(bgNode: T, dadNode: HTMLEle
 	return bgNode;
 }
 
-/**改变大小的函数 */
-export type ResizeFn = () => void;
-/**带着 iframe 的盒子 */
-export interface ResizeBox extends HTMLDivElement {
-	iframes: HTMLIFrameElement[];
-	resizeFns: ResizeFn[];
-}
+/**改变大小时需要运行的函数 */
+export type ResizeFns = readonly (() => void)[];
 /**检测大小改变的 iframe */
-export interface ResizeIframe extends HTMLIFrameElement {
-	resizeFns: ResizeFn[];
-}
-export namespace ResizeIframe {
-	export function onResize(this: ResizeIframe) {
-		this.resizeFns.map(f => f());
+export class ResizeIframe extends Cele<'iframe'> {
+	override readonly onload = () => {
+		this.onresize = () => this.resizeFns.map(f => f());
+	};
+	constructor(
+		resizeBox: ResizeBox,
+		protected readonly resizeFns: ResizeFns,
+	) {
+		super('iframe');
+		merge({
+			height: '100%',
+			width: '100%',
+		}, this.style);
+		resizeBox.appendChild(this);
+		if (this.contentWindow === null) throw Error('no context window');
+		this.contentWindow.onload = this.onload;
 	}
-	export function onLoad(this: ResizeIframe) {
-		this.onresize = onResize as any;
+}
+/**带着 iframe 的盒子 */
+export class ResizeBox extends Cele<'div'> {
+	/**每个 TesterBox 里 TesterIframe 的数量 */
+	protected static iframeNumber = 1;
+	/**所有的 TesterBox */
+	protected static resizeBoxs: ResizeBox[] = [];
+	/**设置或查询所有 TesterBox 里 TesterIframe 的数量 */
+	static checkIframeNumber(n: null | number = null): number {
+		if (n !== null) {
+			this.resizeBoxs.map(e => e.setIframeNumber(n));
+			this.iframeNumber = n;
+		}
+		return this.iframeNumber;
+	}
+
+	protected readonly iframes: HTMLIFrameElement[] = [];
+	/**设置 TesterBox 里 TesterIframe 的数量 */
+	protected readonly setIframeNumber = (n: number) => {
+		while (this.iframes.length < n) {
+			this.iframes.push(new ResizeIframe(this, this.resizeFns));
+		}
+		while (this.iframes.length > n) {
+			const iframe = this.iframes.pop();
+			if (iframe) this.removeChild(iframe);
+		}
+	};
+	constructor(
+		node: HTMLElement,
+		protected readonly resizeFns: (() => void)[] = [],
+	) {
+		super('div');
+		ResizeBox.resizeBoxs.push(this);
+		node.appendChild(this);
+		setBackground(this, node);
+		merge({
+			background: '#333',
+			zIndex: '-9999',
+		}, this.style);
+		this.setIframeNumber(ResizeBox.iframeNumber);
+		node.scpoResizeFns = resizeFns;
 	}
 }
-/**给 boxNode 添加一个 TesterIframe */
-function getResizeIframe(box: ResizeBox, resizeFns: (() => void)[]): ResizeIframe {
-	const iframe = gele('iframe', {
-		resizeFns,
-		style: { height: '100%', width: '100%' },
-	});
-	box.iframes.push(box.appendChild(iframe));
-	if (iframe.contentWindow === null) throw Error();
-	iframe.onload = iframe.contentWindow.onload = ResizeIframe.onLoad as any;
-	return iframe;
-}
-/**每个 TesterBox 里 TesterIframe 的数量 */
-let iframeNumber = 1;
-/**设置或查询 TesterBox 里 TesterIframe 的数量 */
-export function checkIframeNumber(n: null | number = null) {
-	if (n !== null) {
-		resizeBoxs.map(e => {
-			while (e.iframes.length < n) getResizeIframe(e, e.resizeFns);
-			while (e.iframes.length > n) e.removeChild(e.iframes.pop()!);
-		});
-		iframeNumber = n;
-	}
-	return iframeNumber;
-}
-/**所有的 TesterBox */
-export const resizeBoxs: ResizeBox[] = [];
-/**给 `node` 元素添加 onresize 函数 */
-export function pushResizeFn(node: HTMLElement, fn: () => void) {
-	if (node.scpoResizeFns) return node.scpoResizeFns.push(fn);
-	const resizeFns = node.scpoResizeFns = [fn];
-	const boxNode: ResizeBox = gele('div', {
-		resizeFns,
-		iframes: [],
-		style: { background: '#333' },
-	});
-	resizeBoxs.push(node.appendChild(setBackground(boxNode, node)));
-	boxNode.style.zIndex = '-9999';
-	checkIframeNumber(iframeNumber);
-	return 1;
-}
+
 /**获得当前 script 标签所在的标签 */
 export function getDadNode() {
 	const scriptNow = document.scripts;
@@ -131,7 +136,7 @@ export function createBGP(dadNode: HTMLElement, src: string) {
 			top: (yFact - y) / 2 + 'px',
 		}, picNode.style);
 	}
-	pushResizeFn(dadNode, resizeFn);
+	new ResizeBox(dadNode, [resizeFn]);
 	picNode.onload = function () {
 		scale = picNode.width / picNode.height;
 		resizeFn();

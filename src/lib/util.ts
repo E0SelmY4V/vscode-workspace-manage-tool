@@ -59,6 +59,7 @@ export function gid<K extends gele.Tags>(id: string, tag: K): HTMLElementTagName
 
 /**
  * 给 IE 之类没给 HTML 元素做构造函数的环境做一套构造函数
+ * 但是继承于此的类不能给元素额外添加方法，请用箭头函数来解决这个问题
  * @param tag 元素的标签
  */
 export const Cele = class {
