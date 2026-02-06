@@ -33,6 +33,7 @@
 		"prepare": "husky",
 		"prebuild": "tsc",
 		"build": "tsx pack.ts",
+		"cbuild": "tsx workspace/config.ts",
 		"clean": "rimraf res/script/dist && rimraf dist",
 		"test": "tsc --noEmit",
 		"prefmt": "prettier -w .",
