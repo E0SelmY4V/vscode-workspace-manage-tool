@@ -2,9 +2,8 @@ import { config, Default, SideInfo } from '../config';
 import { randomBgColor } from '../lib/scpoui';
 import { Cele, gele } from '../lib/util';
 
-
 export class Cover extends Cele<'div'> {
-	protected timer?: number;
+	private timer?: number;
 	override readonly className = 'ltool_cover';
 	override readonly innerHTML = 'mmmmmmmmmmm';
 	override readonly onmouseover = () => {
@@ -25,6 +24,7 @@ export class Cover extends Cele<'div'> {
 		protected readonly sideBox: SideBox,
 	) { super('div'); }
 }
+
 export class SideBox extends Cele<'div'> {
 	readonly color = randomBgColor();
 	readonly clickdo: () => void;

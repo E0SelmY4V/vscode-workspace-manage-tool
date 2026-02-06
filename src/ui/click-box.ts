@@ -2,7 +2,6 @@ import { config, Default, IdeType, Info, InfoList } from '../config';
 import { prominentSpan, randomBgColor } from '../lib/scpoui';
 import { gele, Cele, thr } from '../lib/util';
 
-
 export class ClickBox extends Cele<'span'> {
 	readonly color = randomBgColor();
 	readonly bg = gele('div', { className: 'llist_bg' });
@@ -72,27 +71,24 @@ export class ClickBox extends Cele<'span'> {
 	}
 }
 
-export function createClickList(node: HTMLDivElement, pathNow: string, list: readonly (Info | InfoList)[]) {
-	list.map(info => {
-		if (info instanceof Array) {
-			const [{ name, path }, ...infos] = info;
-			const nbox = gele('div', {
-				className: 'llist_group',
-				nodes: [
-					gele('span', {
-						nodes: [
-							gele('div', { className: 'blurBG' }),
-							gele('div', { className: 'llist_line' }),
-							gele('h3', { innerHTML: name }),
-						],
-						className: 'llist_title',
-					}),
-					gele('br'),
-				],
-			});
-			node.appendChild(nbox);
-			return createClickList(nbox, pathNow + path + '\\', infos);
-		}
-		node.appendChild(new ClickBox(info, pathNow));
+export function createClickList(pathNow: string, list: readonly (Info | InfoList)[]): HTMLElement[] {
+	return list.map(info => {
+		if (!(info instanceof Array)) return new ClickBox(info, pathNow);
+		const [{ name, path }, ...infos] = info;
+		return gele('div', {
+			className: 'llist_group',
+			nodes: [
+				gele('span', {
+					nodes: [
+						gele('div', { className: 'blurBG' }),
+						gele('div', { className: 'llist_line' }),
+						gele('h3', { innerHTML: name }),
+					],
+					className: 'llist_title',
+				}),
+				gele('br'),
+				...createClickList(pathNow + path + '\\', infos),
+			],
+		});
 	});
 }
