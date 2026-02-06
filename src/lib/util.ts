@@ -57,6 +57,15 @@ export function gid<K extends gele.Tags>(id: string, tag: K): HTMLElementTagName
 	return ele;
 }
 
+/**
+ * 给 IE 之类没给 HTML 元素做构造函数的环境做一套构造函数
+ * @param tag 元素的标签
+ */
+export const Cele = class {
+	constructor(tag: gele.Tags) {
+		return document.createElement(tag);
+	}
+} as new<K extends gele.Tags>(tag: K) => HTMLElementTagNameMap[K];
 
 /**
  * 方便地获得一个元素
