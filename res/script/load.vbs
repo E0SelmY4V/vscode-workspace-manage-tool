@@ -23,5 +23,5 @@ For No = 0 to CONFIG.maxBgp - 1
 		ReqBgp(No)
 		Exit For
 	End If
-	If not Fso.FileExists(GetDir() & "res\bgp\bgp" & No) Then ReqBgp(No)
+	ReqBgp(No)
 Next
